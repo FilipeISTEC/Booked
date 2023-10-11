@@ -1,12 +1,14 @@
+import {Link} from "react-router-dom";
+
 const Navbar = () => {
     return (
       <nav className="navbar">
         <h1>Booked</h1>
         <div className="links">
 
-          <a href="/" style={{
+          <Link to="/" style={{
             color: "green"
-          }}>Home</a>
+          }}>Home</Link>
 
           <a href="/" style={{
             color: "green"

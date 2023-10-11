@@ -1,28 +1,33 @@
-import {useState} from "react"; 
+import {Link} from "react-router-dom";
 import ReviewList from "./ReviewList";
+import useFetch from "./useFetch";
 
 
 
 
 const Home = () => {
-     const [reviews, setReviews] = useState([
-            {title: "tentativa 1", body: "algo...123...", author: "mario", id:1 }, 
-            {title: "tentativa 2..", body: "algo...123...", author: "luigi", id:2 }, 
-            {title: "tentativa 3....", body: "algo...123...", author: "mario", id:3 }, 
+    const{data: reviews, isPending, error} = useFetch("http://localhost:8000/reviews")
+        /*
+        const handleDelete = (id) => {
+            const newReviews = reviews.filter(review => review.id !== id);
+            setReviews(newReviews);
+        }*/
 
-        ]);
-    
-  
+       
+
+
         return (
             <div>
               <div className="review+">
-                <a href="/create" className="New-Review">New Review +</a>
+                <Link to="/create" className="New-Review">New Review +</Link>
               </div>
 
               <div className="home">
-                <ReviewList reviews={reviews} title="Todos as reviews"/>
-                <ReviewList reviews={reviews.filter((review) => review.author === "mario" )} title="Mario blog"/>
+                {error && <div>{error}</div>}
+                {isPending && <div>Loading...</div>}
+                {reviews && <ReviewList reviews={reviews} title="Todos as reviews"  /*handleDelete={handleDelete}*/ />}
                 </div>
+                
             </div>
           );
           
