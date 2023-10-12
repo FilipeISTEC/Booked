@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
-import ReviewList from "./ReviewList";
-import useFetch from "./useFetch";
+import ReviewList from "../components/ReviewList";
+import useFetch from "../hooks/useFetch";
 
 
 

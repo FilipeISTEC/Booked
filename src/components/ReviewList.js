@@ -9,7 +9,7 @@ const ReviewList = ({reviews, title, /*handleDelete*/ }) => {
                     <div className="review-preview" key={review.id}>
                         <Link to={`/review/${review.id}`}>
                         <h2>{ review.title}</h2>
-                        <p>Written by {reviews.author}</p>
+                        <p>Writtenn by {review.author}</p>
                         </Link>
                         {/* <button onClick={() => handleDelete(review.id)}>Delete Blog</button> */}
 

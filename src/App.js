@@ -1,10 +1,10 @@
-import Navbar from "./Navbar";
-import Home from "./Home";
+import Navbar from "./components/Navbar";
+import Home from "./views/Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Create from "./Create";
-import ReviewDetails from "./ReviewDetails";
-import NotFound from "./NotFound";
-import LandingPage from "./LandingPage";
+import Create from "./views/Create";
+import ReviewDetails from "./components/ReviewDetails";
+import NotFound from "./views/NotFound";
+import LandingPage from "./views/LandingPage";
 
 function App() {
   return (
