@@ -1,7 +1,8 @@
+import "../assets/styles/CreateReview.css";
 import { useState } from "react";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
-const Create = () => {
+const CreateReview = () => {
     const [title, setTitle] =useState("");
     const [body, setBody] =useState("");
     const [author, setAuthor] =useState("");
@@ -28,7 +29,7 @@ const Create = () => {
     }
     
     return ( 
-        <div className="create">
+        <div className="create-page">
             <h2>Add a new Review</h2>
             <form onSubmit={handleSubmit}>
                 <label>Review Title:</label>
@@ -54,8 +55,8 @@ const Create = () => {
                 <option value="mario">mario</option>
                 <option value="yoshi">yoshi</option>
                 </select> 
-                {!isPending &&<button>Add Review</button>}
-                { isPending &&<button disabled>Adding Review...</button>}
+                {!isPending &&<button className="CreateReview-btn">Add Review</button>}
+                { isPending &&<button className="CreateReview-btn"disabled>Adding Review...</button>}
                 <p>{title}</p>
                 <p>{body}</p>
                 <p>{author}</p>
@@ -64,4 +65,4 @@ const Create = () => {
      );
 }
  
-export default Create;
+export default CreateReview;

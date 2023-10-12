@@ -1,3 +1,4 @@
+import "../assets/styles/Navbar.css"
 import {Link} from "react-router-dom";
 
 const Navbar = () => {
@@ -10,19 +11,19 @@ const Navbar = () => {
             color: "green"
           }}>Home</Link>
 
-          <a href="/" style={{
+          <Link to="/About" style={{
             color: "green"
-          }}>About</a>
+          }}>About</Link>
 
-          <a href="/" style={{
+          <Link to="/Contact" style={{
             color: "green"
-          }}>Contact</a>
+          }}>Contact</Link>
 
-          <a href="/login" style={{ 
+          <Link to="/Login " style={{ 
             color: 'white', 
             backgroundColor: '#45936C',
             borderRadius: '5px' 
-          }}>Login</a>
+          }}>Login</Link>
 
         </div>
       </nav>

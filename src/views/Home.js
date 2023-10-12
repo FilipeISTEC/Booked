@@ -1,24 +1,21 @@
 import {Link} from "react-router-dom";
 import ReviewList from "../components/ReviewList";
 import useFetch from "../hooks/useFetch";
+import "../assets/styles/Home.css"
 
 
 
 
 const Home = () => {
     const{data: reviews, isPending, error} = useFetch("http://localhost:8000/reviews")
-        /*
-        const handleDelete = (id) => {
-            const newReviews = reviews.filter(review => review.id !== id);
-            setReviews(newReviews);
-        }*/
+       
 
        
 
 
         return (
             <div>
-              <div className="review+">
+              <div className="review">
                 <Link to="/create" className="New-Review">New Review +</Link>
               </div>
 

@@ -1,0 +1,30 @@
+.review {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    gap: 80px;
+}
+
+.New-Review {
+    height: 42px;
+    width: 160px;
+    border-radius: 4px;
+    color: white;
+    background-color: #34A38F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    cursor: pointer;
+}
+
+.reviews {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 15px;
+    row-gap: 35px;
+    margin-bottom: 30px;
+}
