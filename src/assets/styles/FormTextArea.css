@@ -1,0 +1,46 @@
+.textarea-outside {
+    height: 250px;
+    width: 375px;
+    border: 1px solid #CFD3D4;
+    border-radius: 8px;
+    padding: 13px 7px; /* top & bottom then left & right */
+    margin-bottom: 15px;
+}
+
+.textarea-inside {
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+.textarea-inside label {
+    font-size: 13px;
+    color: #5E6366;
+    margin-bottom: 4px;
+}
+.textarea-inside textarea{
+    font-family: 'Roboto';
+    height: 250px;
+    width: 98%;
+    font-size: 17px;
+    outline: none;
+    border: 0;
+    color: #5E6366;
+    resize: none;
+    /* Estilização da barra de rolagem */
+    scrollbar-width: thin; /* Para navegadores que suportam a propriedade scrollbar-width */
+    scrollbar-color: #ccc #f1f1f1; /* Cor da barra e da thumb (trilha e alça) */
+}
+
+/* Estilização da barra de rolagem para navegadores WebKit */
+.textarea-inside textarea::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+}
+
+.textarea-inside textarea::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Cor da thumb (alça) */
+    border-radius: 4px; /* Borda arredondada da thumb */
+}

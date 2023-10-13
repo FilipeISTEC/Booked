@@ -8,20 +8,20 @@ const Navbar = () => {
         <div className="links">
 
           <Link to="/" style={{
-            color: "green"
+            color: "#34A38F"
           }}>Home</Link>
 
           <Link to="/About" style={{
-            color: "green"
+            color: "#34A38F"
           }}>About</Link>
 
           <Link to="/Contact" style={{
-            color: "green"
+            color: "#34A38F"
           }}>Contact</Link>
 
           <Link to="/Login " style={{ 
             color: 'white', 
-            backgroundColor: '#45936C',
+            backgroundColor: '#34A38F',
             borderRadius: '5px' 
           }}>Login</Link>
 

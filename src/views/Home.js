@@ -15,14 +15,16 @@ const Home = () => {
 
         return (
             <div>
-              <div className="review">
-                <Link to="/create" className="New-Review">New Review +</Link>
+              <div className="home-page">
+                <Link to="/create" className="New-Review">
+                  New Review +
+                  </Link>
               </div>
 
-              <div className="home">
+              <div className="reviews">
                 {error && <div>{error}</div>}
                 {isPending && <div>Loading...</div>}
-                {reviews && <ReviewList reviews={reviews} title="Todos as reviews"  /*handleDelete={handleDelete}*/ />}
+                {reviews && <ReviewList reviews={reviews} />}
                 </div>
                 
             </div>

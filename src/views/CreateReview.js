@@ -11,6 +11,8 @@ const CreateReview = () => {
 
     const handleSubmit = (e) => {
           e.preventDefault();
+
+         
           const review ={title, body, author};
 
           setIsPending(true);
@@ -30,6 +32,7 @@ const CreateReview = () => {
     
     return ( 
         <div className="create-page">
+            
             <h2>Add a new Review</h2>
             <form onSubmit={handleSubmit}>
                 <label>Review Title:</label>
@@ -38,27 +41,29 @@ const CreateReview = () => {
                 required 
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+ 
                 />
 
-            <label>Review Body:</label>
+            <label>Review Text:</label>
                <textarea
                 required
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                ></textarea>
-
+            
                <label>Review author:</label>
+               <input
+                type="text"
+                required
+                value={author}
+                 onChange={(e) => setAuthor(e.target.value)}
+                />
 
-               <select 
-               value={author}
-               onChange={(e) => setAuthor(e.target.value)}>
-                <option value="mario">mario</option>
-                <option value="yoshi">yoshi</option>
-                </select> 
+               
+
                 {!isPending &&<button className="CreateReview-btn">Add Review</button>}
                 { isPending &&<button className="CreateReview-btn"disabled>Adding Review...</button>}
                 <p>{title}</p>
-                <p>{body}</p>
                 <p>{author}</p>
             </form>
         </div>
