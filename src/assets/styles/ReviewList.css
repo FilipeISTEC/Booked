@@ -1,6 +1,6 @@
 .review-list {
     width: 100%;
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
   }
@@ -8,20 +8,24 @@
   .card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 50px;
+    margin-left: 55px;
+   
   }
   
   .card {
-    background-color: #f9f9f9;
-    border-radius: 5px;
+    background-color: rgb(244, 241, 241);
+    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 200px;
+    width: 370px;
     height: 300px;
+    position: relative;
   }
   
   .card-content {
     text-align: center;
+    position: relative;
   }
   
   h2 {
@@ -42,3 +46,9 @@
     opacity: 0.7;
   }
   
+
+  .PreviewText {
+    position: absolute;
+    bottom: -180px; 
+    text-align: left;
+  }

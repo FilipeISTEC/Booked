@@ -40,34 +40,3 @@
     background-color: transparent;
 }
 
-.rating-outside {
-    width: 110px;
-    height: 58px;
-    border: 1px solid #CFD3D4;
-    border-radius: 8px;
-    padding: 4px 7px; /* top & bottom then left & right */
-    margin-bottom: 15px;
-}
-
-.rating-inside {
-    border-radius: 8px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-evenly;
-}
-.rating-inside label {
-    font-size: 13px;
-    color: #5E6366;
-}
-.rating-inside input{
-    height: 20px;
-    width: 98%;
-    font-size: 17px;
-    outline: none;
-    border: 0;
-    color: #5E6366;
-}
-

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ReviewDetails = () => {
     const { id } = useParams ();
-    const{ data: review, error, isPending} = useFetch("http://localhost:8000/reviews/"+id);
+    const{ data: review, error, isPending, raiting} = useFetch("http://localhost:8000/reviews/"+id);
     const history = useHistory();
 
     const handleClick= () =>     {
