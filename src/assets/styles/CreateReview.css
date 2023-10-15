@@ -1,0 +1,26 @@
+.create-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divider {
+    width: 1px;
+    background-color: #000;
+    height: 100px;
+    margin: 0 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.preview-left {
+    display: flex;
+    flex-direction: column;
+}
