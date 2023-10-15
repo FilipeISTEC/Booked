@@ -5,6 +5,7 @@ import Create from "./views/CreateReview";
 import ReviewDetails from "./components/ReviewDetails";
 import NotFound from "./views/NotFound";
 import LandingPage from "./views/LandingPage";
+import Login from "./views/Login";
 import About from "./views/About";
 import Contact from "./views/Contact";
 
@@ -44,7 +45,7 @@ function App() {
 
             <Route exact path="/Login">
             <Navbar />
-              <LandingPage />
+              <Login />
             </Route>
 
 

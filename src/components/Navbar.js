@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 const Navbar = () => {
     return (
       <nav className="navbar">
-        <h1>Booked</h1>
+        <h2>Booked</h2>
         <div className="links">
 
           <Link to="/" style={{
@@ -19,7 +19,7 @@ const Navbar = () => {
             color: "#34A38F"
           }}>Contact</Link>
 
-          <Link to="/Login " style={{ 
+          <Link to="/Login" style={{ 
             color: 'white', 
             backgroundColor: '#34A38F',
             borderRadius: '5px' 
