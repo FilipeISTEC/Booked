@@ -3,9 +3,11 @@ const mysql = require('mysql2');
 // create a new MySQL connection
 const connection = mysql.createConnection({
   host: 'mysql-db-booked-db-booked.a.aivencloud.com',
+  port: '22962',
   user: 'avnadmin',
-  password: '22962',
-  database: 'db-booked'
+  password: 'AVNS_RPhw_BkpHf9EOr_l2sK',
+  database: 'db-booked',
+  connectTimeout: 3000
 });
 // connect to the MySQL database
 connection.connect((error) => {
