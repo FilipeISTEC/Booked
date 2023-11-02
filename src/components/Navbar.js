@@ -24,7 +24,12 @@ const Navbar = () => {
             backgroundColor: '#34A38F',
             borderRadius: '5px' 
           }}>Login</Link>
-
+          
+          <Link to="/Logincopy" style={{ 
+            color: 'white', 
+            backgroundColor: '#34A38F',
+            borderRadius: '5px' 
+          }}>Logincopy</Link>
         </div>
       </nav>
     );
