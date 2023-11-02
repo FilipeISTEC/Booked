@@ -3,6 +3,47 @@ body {
     background: #FFFFFF;
 }
 
+.login-card {
+    display: flex; /* Alinha os elementos horizontalmente */
+  }
+  .logo-container {
+    width: 50%; /* Ocupa metade da largura */
+  }
+  .form-container {
+    width: 50%; /* Ocupa a outra metade da largura */
+  }
+  .login-form {
+    width: 100%;
+    margin: 10%;
+    display: grid;
+  }
+  
+  .login-form input.control::placeholder {
+    color: #E4D5C7;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
 .container {
     margin: auto;
     width: 650px; 
@@ -11,7 +52,7 @@ body {
 }
 
 .welcome {
-    background: #45936C;
+    background: #186049;
     width: 650px;
     height: 415px;
     position: absolute;
@@ -24,7 +65,7 @@ body {
     position: absolute;
     top: -10%;
     left: 5%;
-    background: #D7D7D7;
+    background: #6ab29b;
     width: 320px;
     height: 500px;
     border-radius: 5px;

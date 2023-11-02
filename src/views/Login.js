@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import '../assets/styles/Login.css';
 import $ from 'jquery';
+import logo from '../assets/images/Login.png'; // Replace 'path_to_your_logo' with the actual path to your logo image file
+
 
 const Login = () => {
     useEffect(() => {
@@ -18,6 +20,11 @@ const Login = () => {
     }, []);
 
     return (
+        <div className="login-card">
+            <div className="logo-container" style={{ display: 'flex', alignItems: 'center', height: '80vh', justifyContent: 'center' }}>
+                <img src={logo} alt="Logo" style={{ width: '50%', height: '' }}/>
+            </div>
+            <div className="form-container">
         <div className="container">
             <div className="welcome">
                 <div className="overbox">
@@ -34,20 +41,34 @@ const Login = () => {
                     </div>
                     <div className="signin">
                         <h1>Sign in</h1>
-                        <form className="more-padding" autoComplete="off">
-                            <input type="text" placeholder="Username" />
-                            <input type="password" placeholder="Password" />
-                            <div className="checkbox">
-                                <input type="checkbox" id="remember" /><label htmlFor="remember">Remember me</label>
+                        <form className="login-form">
+                            <div className="username">
+                                <input
+                                    autoComplete="off"
+                                    spellCheck="false"
+                                    className="control"
+                                    type="email"
+                                    placeholder="Email"
+                                />
+                                <div id="spinner" className="spinner"></div>
                             </div>
-                            <button className="button submit">Login</button>
+                            <input
+                                name="password"
+                                spellCheck="false"
+                                className="control"
+                                type="password"
+                                placeholder="Password"
+
+                            />
+
+                            <button className="control" type="button">JOIN NOW</button>
                         </form>
                     </div>
                 </div>
                 <div className="leftbox">
                     <h2 className="title">BOO<span>KED</span></h2>
                     <p className="desc">The perfect book <br></br><span> for the perfect time</span></p>
-                    <img className="img smaller" src="https://png.pngtree.com/png-clipart/20230708/original/pngtree-book-knowledge-tree-reading-learning-illustration-png-image_9278452.png" alt="" />
+                    
                     
                     <p className="account">have an account?</p>
                     <button className="button" id="signin">login</button>
@@ -55,11 +76,13 @@ const Login = () => {
                 <div className="rightbox">
                 <h2 className="title">BOO<span>KED</span></h2>
                 <p className="desc">The perfect book <br></br><span> for the perfect time</span></p>
-                    <img className="img" src="https://assets.stickpng.com/images/58e38a3b204d556bbd97b155.png" alt="" />
+                
                     <p className="account">don't have an account?</p>
                     <button className="button" id="signup">sign up</button>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     );
 }
