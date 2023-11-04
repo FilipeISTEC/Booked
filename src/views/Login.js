@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../assets/styles/Login.css';
 import $ from 'jquery';
 import logo from '../assets/images/Login.png'; // Replace 'path_to_your_logo' with the actual path to your logo image file
 
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
     useEffect(() => {
         $('#signup').click(function() {
             $('.overbox').css('transform', 'translateX(80%)');
@@ -18,6 +22,30 @@ const Login = () => {
             $('.signin').removeClass('nodisplay');
         });
     }, []);
+
+    const handleLogin = () => {
+        // Aqui você pode adicionar a lógica para validar o login
+        if (email && password) {
+          // Lógica de autenticação
+          console.log('Login válido');
+        } else {
+          console.log('Preencha todos os campos');
+        }
+      };
+    
+    const handleSignup = () => {
+      // Aqui você pode adicionar a lógica para validar o registro
+      if (email && password && confirmPassword) {
+        if (password === confirmPassword) {
+          // Lógica de registro
+          console.log('Registro válido');
+        } else {
+          console.log('As senhas não correspondem');
+        }
+      } else {
+        console.log('Preencha todos os campos');
+      }
+    };
 
     return (
         <div className="login-card">
@@ -33,10 +61,10 @@ const Login = () => {
                         <h1>Sign up</h1>
                         <form autoComplete="off">
                             <input type="text" placeholder="Username" />
-                            <input type="email" placeholder="Email" />
-                            <input type="password" placeholder="Password" />
-                            <input type="password" placeholder="Confirm password" />
-                            <button className="button submit">Create account </button>
+                            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                            <button className="button submit" type="button" onClick={handleSignup}>Create Account</button>
                         </form>
                     </div>
                     <div className="signin">
@@ -49,6 +77,7 @@ const Login = () => {
                                     className="control"
                                     type="email"
                                     placeholder="Email"
+                                    value={email} onChange={(e) => setEmail(e.target.value)}
                                 />
                                 <div id="spinner" className="spinner"></div>
                             </div>
@@ -58,17 +87,16 @@ const Login = () => {
                                 className="control"
                                 type="password"
                                 placeholder="Password"
-
+                                value={password} onChange={(e) => setPassword(e.target.value)}
                             />
 
-                            <button className="control" type="button">JOIN NOW</button>
+                            <button className="control" type="button" onClick={handleLogin}>JOIN NOW</button>
                         </form>
                     </div>
                 </div>
                 <div className="leftbox">
                     <h2 className="title">BOO<span>KED</span></h2>
                     <p className="desc">The perfect book <br></br><span> for the perfect time</span></p>
-                    
                     
                     <p className="account">have an account?</p>
                     <button className="button" id="signin">login</button>
