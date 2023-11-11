@@ -1,42 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/styles/ratingStar.css";
 import starEmptyImage from "../assets/images/star-empty.svg";
 import starFilledImage from "../assets/images/star-filled.svg";
 
-function StarRating() {
-  const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(null);
+function Star({ isSelected, onClick }) {
+  return (
+    <div
+      onClick={onClick}
+      style={{ display: "inline-block", cursor: "pointer" }}
+    >
+      <img
+        src={isSelected ? starFilledImage : starEmptyImage}
+        alt="Star"
+        className="star"
+        style={{ width: "24px", height: "24px" }}
+      />
+    </div>
+  );
+}
+
+function StarRating({
+  reviewId,
+  initialRating = 0,
+  onRatingChange,
+  disableHover,
+}) {
+  const [rating, setRating] = useState(initialRating);
+
+  useEffect(() => {
+    if (onRatingChange) {
+      onRatingChange(reviewId, rating);
+    }
+  }, [rating, onRatingChange, reviewId]);
+
+  const handleStarClick = (selectedRating) => {
+    if (!disableHover) {
+      setRating(selectedRating);
+    }
+  };
 
   return (
     <div className="star-rating">
-      {[...Array(5)].map((_, index) => {
-        const currentRating = index + 1;
-        return (
-          <label key={index}>
-            <input
-              type="radio"
-              name="rating"
-              value={currentRating}
-              onClick={() => setRating(currentRating)}
-            />
-            <img
-              src={
-                currentRating <= (hover || rating)
-                  ? starFilledImage
-                  : starEmptyImage
-              }
-              alt={`Star ${index + 1}`}
-              className="star"
-              style={{
-                cursor: "pointer",
-                opacity: currentRating <= (hover || rating) ? 1 : 0.5,
-              }}
-              onMouseEnter={() => setHover(currentRating)}
-              onMouseLeave={() => setHover(null)}
-            />
-          </label>
-        );
-      })}
+      {[...Array(5)].map((_, index) => (
+        <Star
+          key={index}
+          isSelected={index < rating}
+          onClick={() => handleStarClick(index + 1)}
+        />
+      ))}
     </div>
   );
 }

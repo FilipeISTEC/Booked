@@ -1,11 +1,10 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import "../assets/styles/ReviewList.css";
-import "../assets/utils/getCurrentDate.js";
 import getCurrentDate from "../assets/utils/getCurrentDate";
-// import Rating from "./Rating";
-import StarRating from "./StarRating.js";
+import StarRating from "./StarRating"; // Importe o componente StarRating
+import "../assets/styles/ReviewList.css";
 
-const ReviewList = ({ reviews, title, date, rating }) => {
+const ReviewList = ({ reviews, title, date }) => {
   const displayDate = date === undefined ? getCurrentDate() : date;
 
   return (
@@ -19,11 +18,22 @@ const ReviewList = ({ reviews, title, date, rating }) => {
               <div className="card-content">
                 <h2 className="title">{review.title}</h2>
                 <p>By</p>
-
                 <h3>{review.author}</h3>
-                <StarRating rating={review.rating} />
                 <p className="Hora">{displayDate}</p>
                 <p className="PreviewText">{review.body.substring(0, 400)}</p>
+
+                {/* Adicione o componente StarRating aqui */}
+                <StarRating
+                  reviewId={review.id}
+                  initialRating={review.rating} // Se a revisão já tiver uma classificação
+                  onRatingChange={(reviewId, newRating) => {
+                    // algo com a nova classificação, se necessário
+                    console.log(
+                      `Review ${reviewId} recebeu uma nova classificação: ${newRating}`
+                    );
+                    // podes querer enviar isso para um servidor ou atualizar o estado do componente
+                  }}
+                />
               </div>
             </Link>
           </div>
