@@ -1,37 +1,38 @@
 .landing {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* Define a altura total da janela do navegador */
-    background-image: url('../images/wave-haikei.svg');
-    background-size: cover;
-    background-position: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Define a altura total da janela do navegador */
+  background-image: url("../images/wave-haikei.svg");
+  background-size: cover;
+  background-position: center;
 }
 
-h1, h3 {
-    cursor:default;
+h1,
+h3 {
+  cursor: default;
 }
 
 .top {
-    flex: 0 0 auto; /* Não crescerá nem encolherá, tamanho automático */
-    text-align: start;
-    padding-left: 50px;
-    padding-top: 30px;
+  flex: 0 0 auto; /* Não crescerá nem encolherá, tamanho automático */
+  text-align: start;
+  padding-left: 50px;
+  padding-top: 30px;
 }
 
 .top h1 {
-    color: #34A38F;
+  color: #34a38f;
 }
 
 .colored-text {
-  color: #34A38F; /* Substitua pelo código da cor desejada */
+  color: #34a38f; /* Substitua pelo código da cor desejada */
 }
 
 .rest {
-    padding-top: 30vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+  padding-top: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 /* Margem entre h1 e h3*/
 .rest h1,
@@ -40,28 +41,38 @@ h1, h3 {
 }
 
 .rest h1 {
-    font-size: 55px;
-    font-weight: bold;
-    color: #343435;
+  font-size: 55px;
+  font-weight: bold;
+  color: #343435;
 }
 
 .rest h3 {
-    font-size: 24px;
-    font-weight: normal;
-    color: #797979;
+  font-size: 24px;
+  font-weight: normal;
+  color: #797979;
 }
 
 .enter-website {
-    margin-top: 20px;
-    padding: 15px 32px;
-    border-radius: 4px;
-    border: 0px;
-    background-color: #34A38F;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
+  margin-top: 20px;
+  padding: 15px 32px;
+  border-radius: 4px;
+  border: 0px;
+  background-color: #34a38f;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
 }
-
-
-
-  
+.btngohome {
+  height: 42px;
+  width: 160px;
+  border-radius: 5px;
+  background-color: #34a38f;
+  border: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 55%;
+  left: 46%;
+  color: white;
+}
