@@ -8,7 +8,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
+    
+    //---------------------------------Troca de lado Login--------------------------------
     useEffect(() => {
         $('#signup').click(function() {
             $('.overbox').css('transform', 'translateX(80%)');
@@ -22,7 +23,7 @@ const Login = () => {
             $('.signin').removeClass('nodisplay');
         });
     }, []);
-
+    //------------------------------------------------------------------------------------------------
     const handleLogin = () => {
         // Aqui você pode adicionar a lógica para validar o login
         if (email && password) {
@@ -32,7 +33,6 @@ const Login = () => {
           console.log('Preencha todos os campos');
         }
       };
-    
     const handleSignup = () => {
       // Aqui você pode adicionar a lógica para validar o registro
       if (email && password && confirmPassword) {
@@ -46,7 +46,6 @@ const Login = () => {
         console.log('Preencha todos os campos');
       }
     };
-
     return (
         <div className="login-card">
             <div className="logo-container" style={{ display: 'flex', alignItems: 'center', height: '80vh', justifyContent: 'center' }}>
@@ -56,14 +55,13 @@ const Login = () => {
         <div className="container">
             <div className="welcome">
                 <div className="overbox">
-                    
                     <div className="signup nodisplay">
                         <h1>Sign up</h1>
                         <form autoComplete="off">
-                            <input type="text" placeholder="Username" />
-                            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                            <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                            <input type="text" name="username" placeholder="Username" />
+                            <input type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <input type="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input type="password" name="confirmPassword" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                             <button className="button submit" type="button" onClick={handleSignup}>Create Account</button>
                         </form>
                     </div>
@@ -89,7 +87,6 @@ const Login = () => {
                                 placeholder="Password"
                                 value={password} onChange={(e) => setPassword(e.target.value)}
                             />
-
                             <button className="control" type="button" onClick={handleLogin}>JOIN NOW</button>
                         </form>
                     </div>
@@ -104,7 +101,6 @@ const Login = () => {
                 <div className="rightbox">
                 <h2 className="title">BOO<span>KED</span></h2>
                 <p className="desc">The perfect book <br></br><span> for the perfect time</span></p>
-                
                     <p className="account">don't have an account?</p>
                     <button className="button" id="signup">sign up</button>
                 </div>
