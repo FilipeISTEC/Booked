@@ -34,6 +34,7 @@ function StarRating({
   }, [rating, onRatingChange, reviewId]);
 
   const handleStarClick = (selectedRating) => {
+    console.log("Selected Rating:", selectedRating);
     if (!disableHover) {
       setRating(selectedRating);
     }

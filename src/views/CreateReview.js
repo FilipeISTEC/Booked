@@ -15,6 +15,7 @@ const CreateReview = () => {
     e.preventDefault();
 
     const review = { title, body, author, rating };
+    console.log("Review Object:", review); // Adicione este log
 
     setIsPending(true);
 
@@ -78,7 +79,7 @@ const CreateReview = () => {
 
       <div className="form-group">
         <label>Rating:</label>
-        <StarRating />
+        <StarRating initialRating={rating} onRatingChange={setRating} />
       </div>
 
       <div className="preview-left">
