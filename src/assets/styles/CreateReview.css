@@ -1,26 +1,92 @@
-.create-page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* CreateReview.css */
+
+.right {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-page,
+.preview-left {
+  width: 45%; /* Adjust the width as needed */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .divider {
-    width: 1px;
-    background-color: #000;
-    height: 100px;
-    margin: 0 20px;
+  height: 1px;
+  background-color: #ccc;
+  margin: 15px 0;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 1rem;
+  margin-bottom: 15px;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+.button-group {
+  text-align: center;
+}
+
+.CreateReview-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.CreateReview-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .preview-left {
-    display: flex;
-    flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.titulo-input {
+  font-family: "Lucida Console", Monospace; /* Substitua 'Nome da Fonte' pela fonte desejada */
+  color: black;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.preview-left input,
+.preview-left textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  box-sizing: border-box;
+  background-color: white; /* Defina a cor de fundo para branco */
+  border: 1px solid #ccc; /* Adicione uma borda para destacar o campo */
+  border-radius: 4px; /* Adicione bordas arredondadas */
+}
+
+/* Adapte conforme necessário para o seu estilo */
+.star {
+  cursor: pointer;
+  font-size: 24px;
+  color: #ddd;
+  margin-right: 5px;
+}
+
+.star.selected {
+  color: #ffcc00; /* Cor quando selecionada */
 }

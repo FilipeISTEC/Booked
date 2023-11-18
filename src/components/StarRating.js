@@ -1,56 +1,31 @@
-import React, { useEffect, useState } from "react";
-import "../assets/styles/ratingStar.css";
-import starEmptyImage from "../assets/images/star-empty.svg";
-import starFilledImage from "../assets/images/star-filled.svg";
+// components/StarRating.js
 
-function Star({ isSelected, onClick }) {
-  return (
-    <div
-      onClick={onClick}
-      style={{ display: "inline-block", cursor: "pointer" }}
-    >
-      <img
-        src={isSelected ? starFilledImage : starEmptyImage}
-        alt="Star"
-        className="star"
-        style={{ width: "24px", height: "24px" }}
-      />
-    </div>
-  );
-}
+import React from "react";
 
-function StarRating({
-  reviewId,
-  initialRating = 0,
-  onRatingChange,
-  disableHover,
-}) {
-  const [rating, setRating] = useState(initialRating);
+const StarRating = ({ initialRating, onRatingChange, readOnly }) => {
+  const stars = Array.from({ length: 5 }, (_, index) => index + 1);
 
-  useEffect(() => {
-    if (onRatingChange) {
-      onRatingChange(reviewId, rating);
-    }
-  }, [rating, onRatingChange, reviewId]);
-
-  const handleStarClick = (selectedRating) => {
-    console.log("Selected Rating:", selectedRating);
-    if (!disableHover) {
-      setRating(selectedRating);
+  const handleRatingChange = (newRating) => {
+    // Somente chama a função se ela for fornecida e o componente não for somente leitura
+    if (!readOnly) {
+      // Certifique-se de que onRatingChange é uma função antes de chamá-la
+      typeof onRatingChange === "function" && onRatingChange(newRating);
     }
   };
 
   return (
     <div className="star-rating">
-      {[...Array(5)].map((_, index) => (
-        <Star
-          key={index}
-          isSelected={index < rating}
-          onClick={() => handleStarClick(index + 1)}
-        />
+      {stars.map((star) => (
+        <span
+          key={star}
+          className={`star ${star <= initialRating ? "selected" : ""}`}
+          onClick={() => handleRatingChange(star)}
+        >
+          ★
+        </span>
       ))}
     </div>
   );
-}
+};
 
 export default StarRating;
