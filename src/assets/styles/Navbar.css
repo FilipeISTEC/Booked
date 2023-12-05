@@ -1,77 +1,71 @@
 .navbar {
-    display: flex;
-    padding: 0 50px 0 50px;
-    align-items: center;
-    height: 10vh;
+  display: flex;
+  padding: 0 50px 0 50px;
+  align-items: center;
+  height: 10vh;
 }
 
 .navbar h1 {
-    font-size: 32px;
-    color: #34A38F;
-    cursor: pointer;
+  font-size: 32px;
+  color: #34a38f;
+  cursor: pointer;
 }
 
 .search {
-    display: flex;
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-self: center;
-    margin: 1em auto;
-    width: 317px;
-    height: 45px;
-    flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin: 1em auto;
 }
 
 .search-content {
-    border-radius: 4px;
-    display: flex;
-    align-items: center; /* Centraliza verticalmente */
-    border: 1px solid #DADADA;
-    width: 350px;
-    height: 45px;
-    background-color: #F5F5F5;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #dadada;
+  background-color: #f5f5f5;
 }
+
 .search-content input {
-    height: 20px;
-    width: 250px;
-    font-size: 17px;
-    outline: none;
-    border: 0;
-    background-color: #F5F5F5;
-    margin-left: 20px;
-    color: #737373;
+  height: 45px;
+  width: 250px;
+  font-size: 17px;
+  outline: none;
+  border: 0;
+  background-color: #f5f5f5;
+  margin-left: 20px;
+  color: #737373;
 }
+
 .search-icon {
-    cursor: pointer;
-    margin-left: 25px;
-    height: 20px;
-    width: 20px;
-    background-size: cover;
-    background-position: center;
-    background-image: url('../images/search-icon.svg');
+  cursor: pointer;
+  margin-left: 15px;
+  height: 20px;
+  width: 20px;
+  background-size: cover;
+  background-position: center;
+  background-image: url("../images/search-icon.svg"); /* Certifique-se de fornecer o caminho correto para a imagem */
 }
 
 .navbar .links {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .navbar a {
-    margin-left: 30px;
-    text-decoration: none;
-    padding: 6px;
-    font-size: 17px;
-    font-weight: bold;
-    color: #34A38F;
+  margin-left: 30px;
+  text-decoration: none;
+  padding: 6px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #34a38f;
 }
 
 .navbar a:last-child {
-    font-weight: normal;
-    font-size: 17px;
-    border-radius: 4px;
-    background-color: "#34A38F";
-    color: white;
-    padding-left: 17px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 17px;
+  font-weight: normal;
+  font-size: 17px;
+  border-radius: 4px;
+  background-color: #34a38f;
+  color: white;
+  padding: 10px 17px;
 }

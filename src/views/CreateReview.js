@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import StarRating from "../components/StarRating";
 
+// ... (previous imports)
+
 const CreateReview = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -31,69 +33,8 @@ const CreateReview = () => {
   };
 
   return (
-    <div className="right">
-      <div className="create-page">
-        <h2>Add a new Review</h2>
-        <div className="divider"></div>
-        <div className="form">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Book Title</label>
-              <input
-                type="text"
-                required
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Book author:</label>
-              <input
-                type="text"
-                required
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Review:</label>
-              <textarea
-                required
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-              ></textarea>
-            </div>
-
-            <div className="form-group">
-              <label>Rating:</label>
-              <select
-                value={selectedRating}
-                onChange={(e) => setSelectedRating(parseInt(e.target.value))}
-              >
-                {[1, 2, 3, 4, 5].map((value) => (
-                  <option key={value} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="button-group">
-              {!isPending ? (
-                <button className="CreateReview-btn">Add Review</button>
-              ) : (
-                <button className="CreateReview-btn" disabled>
-                  Adding Review...
-                </button>
-              )}
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <div className="preview-left">
+    <div className="container">
+      <div className="left">
         <input
           type="titulo--preview"
           disabled
@@ -109,8 +50,72 @@ const CreateReview = () => {
           <StarRating initialRating={selectedRating} />
         </div>
       </div>
+
+      <div className="right">
+        <div className="create-page">
+          <h2>Add a new Review</h2>
+          <div className="divider"></div>
+          <div className="form">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Book Title</label>
+                <input
+                  type="text"
+                  required
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Book author:</label>
+                <input
+                  type="text"
+                  required
+                  value={author}
+                  onChange={(e) => setAuthor(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Review:</label>
+                <textarea
+                  required
+                  value={body}
+                  onChange={(e) => setBody(e.target.value)}
+                ></textarea>
+              </div>
+
+              <div className="form-group">
+                <label>Rating:</label>
+                <select
+                  value={selectedRating}
+                  onChange={(e) => setSelectedRating(parseInt(e.target.value))}
+                >
+                  {[1, 2, 3, 4, 5].map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="button-group">
+                {!isPending ? (
+                  <button className="CreateReview-btn">Add Review</button>
+                ) : (
+                  <button className="CreateReview-btn" disabled>
+                    Adding Review...
+                  </button>
+                )}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default CreateReview;
+
