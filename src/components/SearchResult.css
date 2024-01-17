@@ -1,0 +1,10 @@
+/* SearchResult.css */
+.Search-result {
+    padding: 10px 20px;
+  }
+  
+  .Search-result:hover {
+    background-color: #efefef;
+  }
+  
+  
