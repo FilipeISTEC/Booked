@@ -4,6 +4,9 @@ import { FaSearch } from 'react-icons/fa';
 import './SearchBar.css';
 import { SearchResultsList } from './SearchResultsList';
 
+import axios from 'axios';
+
+
 export const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState('');
 

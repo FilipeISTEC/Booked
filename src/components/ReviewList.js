@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import getCurrentDate from "../assets/utils/getCurrentDate";
 import StarRating from "./StarRating"; // Importe o componente StarRating
 import "../assets/styles/ReviewList.css";
+import axios from 'axios';
 
 const ReviewList = ({ reviews, title, date }) => {
   const displayDate = date === undefined ? getCurrentDate() : date;
-
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=flowers&maxResults=1&key=AIzaSyAtcOZDRTzTQgsACmW2w12wy4nDkngrguU`; // Lembre-se de substituir YOUR_API_KEY pela sua chave de API
+    const books =  axios.get(apiUrl);
+    console.log(books);
   return (
     <div className="review-list">
       <h2>{title}</h2>
@@ -40,7 +43,10 @@ const ReviewList = ({ reviews, title, date }) => {
         ))}
       </div>
     </div>
+    
   );
+
+ 
 };
 
 export default ReviewList;
