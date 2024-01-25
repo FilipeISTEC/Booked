@@ -5,6 +5,7 @@ import logo from '../assets/images/Login.png'; // Replace 'path_to_your_logo' wi
 
 
 const Login = () => {
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -24,28 +25,21 @@ const Login = () => {
         });
     }, []);
     //------------------------------------------------------------------------------------------------
-    const handleLogin = () => {
-        // Aqui você pode adicionar a lógica para validar o login
-        if (email && password) {
-          // Lógica de autenticação
-          console.log('Login válido');
-        } else {
-          console.log('Preencha todos os campos');
-        }
-      };
-    const handleSignup = () => {
-      // Aqui você pode adicionar a lógica para validar o registro
-      if (email && password && confirmPassword) {
-        if (password === confirmPassword) {
-          // Lógica de registro
-          console.log('Registro válido');
-        } else {
-          console.log('As senhas não correspondem');
-        }
-      } else {
-        console.log('Preencha todos os campos');
-      }
-    };
+    function handleLogin(e) {
+        e.preventDefault();
+        const url = '';  // ou a URL correta do seu backend
+        fetch(url, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Erro:', error));
+    }
+    
     return (
         <div className="login-card">
             <div className="logo-container" style={{ display: 'flex', alignItems: 'center', height: '80vh', justifyContent: 'center' }}>
@@ -62,7 +56,7 @@ const Login = () => {
                             <input type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                             <input type="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                             <input type="password" name="confirmPassword" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                            <button className="button submit" type="button" onClick={handleSignup}>Create Account</button>
+                            <button className="button submit" type="button">Create Account</button>
                         </form>
                     </div>
                     <div className="signin">
@@ -73,9 +67,9 @@ const Login = () => {
                                     autoComplete="off"
                                     spellCheck="false"
                                     className="control"
-                                    type="email"
-                                    placeholder="Email"
-                                    value={email} onChange={(e) => setEmail(e.target.value)}
+                                    type="text"
+                                    placeholder="Username"
+                                    value={username} onChange={(e) => setUsername(e.target.value)}
                                 />
                                 <div id="spinner" className="spinner"></div>
                             </div>
@@ -83,11 +77,11 @@ const Login = () => {
                                 name="password"
                                 spellCheck="false"
                                 className="control"
-                                type="password"
+                                type="text"
                                 placeholder="Password"
                                 value={password} onChange={(e) => setPassword(e.target.value)}
                             />
-                            <button className="control" type="button" onClick={handleLogin}>JOIN NOW</button>
+                            <button className="control" type="submit" onClick={handleLogin}>ENTER</button>
                         </form>
                     </div>
                 </div>
