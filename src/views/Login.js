@@ -27,7 +27,7 @@ const Login = () => {
     //------------------------------------------------------------------------------------------------
     function handleLogin(e) {
         e.preventDefault();
-        const url = '';  // ou a URL correta do seu backend
+        const url = 'http://localhost:5000/login';  // ou a URL correta do seu backend
         fetch(url, {
             method: 'POST',
             headers: {
