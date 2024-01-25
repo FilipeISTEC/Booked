@@ -27,13 +27,27 @@ const Login = () => {
     //------------------------------------------------------------------------------------------------
     function handleLogin(e) {
         e.preventDefault();
-        const url = 'http://localhost:5000/login';  // ou a URL correta do seu backend
+        const url = 'http://localhost:5000/login';  
         fetch(url, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
             },
             body: JSON.stringify({ username, password }),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Erro:', error));
+    }
+    function handleCreate(e) {
+        e.preventDefault();
+        const url = 'http://localhost:5000/caccount';  
+        fetch(url, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, password }),
         })
         .then(response => response.json())
         .then(data => console.log(data))
@@ -51,12 +65,12 @@ const Login = () => {
                 <div className="overbox">
                     <div className="signup nodisplay">
                         <h1>Sign up</h1>
-                        <form autoComplete="off">
-                            <input type="text" name="username" placeholder="Username" />
-                            <input type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <form className="login-form">
+                            <input type="text" name="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                            <input type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                             <input type="password" name="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                            <input type="password" name="confirmPassword" placeholder="Confirm password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                            <button className="button submit" type="button">Create Account</button>
+                            <input type="password" name="confirmPassword" placeholder="Confirm password"/>
+                            <button className="control" type="submit" onClick={handleCreate}>Create Account</button>
                         </form>
                     </div>
                     <div className="signin">
