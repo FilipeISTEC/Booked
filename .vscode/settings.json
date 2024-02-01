@@ -1,4 +1,22 @@
 {
   "liveServer.settings.port": 5501,
-  "editor.inlineSuggest.showToolbar": "onHover"
+  "editor.inlineSuggest.showToolbar": "onHover",
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Enabled",
+        "ssl": {
+          "ca": "/Users/simao/Desktop/ca .pem"
+        }
+      },
+      "previewLimit": 50,
+      "server": "mysql-db-booked-db-booked.a.aivencloud.com",
+      "port": 22962,
+      "driver": "MySQL",
+      "name": "defaultdb",
+      "database": "defaultdb",
+      "username": "avnadmin"
+    }
+  ]
 }

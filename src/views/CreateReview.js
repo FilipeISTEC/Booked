@@ -13,45 +13,13 @@ const CreateReview = () => {
   const history = useHistory();
   const [selectedRating, setSelectedRating] = useState(1);
 
-
-  useEffect(() => {
-    const adjustHeight = (element) => {
-      element.style.height = 'auto';
-      element.style.height = `${element.scrollHeight}px`;
-    };
-  
-    const titleInput = document.getElementById('tituloInput');
-    const authorInput = document.getElementById('authorInput');
-    const bodyTextarea = document.getElementById('bodyTextarea');
-  
-    if (titleInput) {
-      adjustHeight(titleInput);
-    }
-  
-    if (authorInput) {
-      adjustHeight(authorInput);
-    }
-  
-    if (bodyTextarea) {
-      adjustHeight(bodyTextarea);
-    }
-  }, [title, author, body]);
-  
-  
-
-  const handleTitleChange = (newTitle, newAuthor) => {
-    setTitle(newTitle);
-    setAuthor(newAuthor);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const review = { title, body, author, rating: selectedRating };
+    const review = { title, user, body, author, rating: selectedRating };
     console.log("Review Object:", review);
 
     setIsPending(true);
-
 
     fetch("http://localhost:8000/reviews", {
       method: "POST",
@@ -62,6 +30,11 @@ const CreateReview = () => {
       setIsPending(false);
       history.push("/");
     });
+  };
+
+  const handleTitleChange = (newTitle, newAuthor) => {
+    setTitle(newTitle);
+    setAuthor(newAuthor);
   };
 
   return (
