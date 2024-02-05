@@ -26,7 +26,7 @@ export const SearchBar = ({ setResults }) => {
   };
 
   const fetchData = (value) => {
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${value}&key=AIzaSyAtcOZDRTzTQgsACmW2w12wy4nDkngrguU`; // Lembre-se de substituir YOUR_API_KEY pela sua chave de API
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${value}&key=AIzaSyAtcOZDRTzTQgsACmW2w12wy4nDkngrguU`; 
 
     console.log('API URL:', apiUrl);
 
