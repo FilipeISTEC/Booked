@@ -12,10 +12,10 @@ app.post("/login", async (req, res) => {
     const { username, password } = req.body;
 });
 
-app.post("/caccount", async (req, res) => {
-  const { title, rating, comment } = req.body;
+app.post("/reviews", async (req, res) => {
+  const { title, rating, comment, reviewID } = req.body;
   try {
-    const [existingUserRows, existingUserFields] = await pool.query('SELECT * FROM Reviews WHERE ReviewID = ?', [username]);
+    const [existingUserRows, existingUserFields] = await pool.query('SELECT * FROM Reviews WHERE ReviewID = ?', [reviewID]);
 
     // If the username is not taken, proceed to register the user
     const query = 'INSERT INTO Reviews (BookID, Rating, Comment) VALUES (?, ?, ?)';

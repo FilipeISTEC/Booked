@@ -23,20 +23,22 @@ const ReviewList = ({ reviews, title, date }) => {
                 <p>By</p>
                 <h3>{review.author}</h3>
                 <p className="Hora">{displayDate}</p>
-                <p className="PreviewText">{review.body.substring(0, 400)}</p>
 
                 {/* Adicione o componente StarRating aqui */}
                 <StarRating
                   reviewId={review.id}
-                  initialRating={review.rating} // Se a revisão já tiver uma classificação
+                  initialRating={review.rating} 
+                  // Se a revisão já tiver uma classificação
                   onRatingChange={(reviewId, newRating) => {
                     // algo com a nova classificação, se necessário
                     console.log(
                       `Review ${reviewId} recebeu uma nova classificação: ${newRating}`
                     );
+                    
                     // podes querer enviar isso para um servidor ou atualizar o estado do componente
                   }}
                 />
+                <p className="PreviewText">{review.body.substring(0, 400)}</p>
               </div>
             </Link>
           </div>
@@ -49,4 +51,4 @@ const ReviewList = ({ reviews, title, date }) => {
  
 };
 
-export default ReviewList;
+export default ReviewList; 
