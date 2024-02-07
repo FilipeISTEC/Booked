@@ -8,4 +8,5 @@ Maybe there is a need to install some modules like:
  - Express: npm install express
  - CORS: npm install cors
  - MySQL2: npm install mysql2
+ - JWT: npm isntall jsonwebtoken
 If there still exists any problem with a module, try installing it using the command npm install name_module."

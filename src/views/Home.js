@@ -8,11 +8,7 @@ import "../assets/styles/Home.css"
 
 const Home = () => {
     const{data: reviews, isPending, error} = useFetch("http://localhost:8000/reviews")
-       
-
-       
-
-
+    
         return (
             <div>
               <div className="home-page">
