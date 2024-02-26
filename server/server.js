@@ -19,7 +19,7 @@ app.post("/login", async (req, res) => {
             const user = rows[0];
             if (password === user.Password) {
                 const token = jwt.sign({ username: user.Username }, 'M1nhaC#av3S3cr3ta&SupeR!Segur@P@raTok3nsJWT', { expiresIn: '1h' }); // Gera o token JWT
-                res.json({ success: true, token }); // Retorna o token JWT
+                res.json({ success: true, userID: user.UserID, token }); // Retorna o token JWT e o UserID
             } else {
                 res.status(401).json({ success: false, message: 'Credenciais inválidas' });
             }
@@ -31,6 +31,7 @@ app.post("/login", async (req, res) => {
         res.status(500).json({ success: false, message: 'Erro interno do servidor' });
     }
 });
+
 
 app.post("/caccount", async (req, res) => {
     const { username, email, password } = req.body;
@@ -56,6 +57,68 @@ app.post("/caccount", async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error register' });
     }
 });
+app.get("/books", async (req, res) => {
+    try {
+        // Execute a consulta para obter os títulos e IDs de todos os livros
+        const query = 'SELECT BookID AS id, Title FROM Books'; // Usando BookID como ID do livro
+        const [rows, fields] = await pool.query(query);
+
+        // Verifique se há dados retornados da consulta
+        if (rows.length > 0) {
+            // Se houver dados, retorne os títulos e IDs dos livros
+            res.status(200).json(rows);
+        } else {
+            // Se não houver dados, retorne uma mensagem indicando que nenhum livro foi encontrado
+            res.status(404).json({ success: false, message: 'No books found' });
+        }
+    } catch (error) {
+        // Se ocorrer algum erro durante a execução da consulta, retorne uma mensagem de erro
+        console.error('Error fetching books from database:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
+app.post("/creview", async (req, res) => {
+    const { title, body, userId, bookId, rating } = req.body; // Extrai os dados do corpo da solicitação
+
+    try {
+        // Insira os dados da avaliação no banco de dados
+        const query = 'INSERT INTO Reviews (Title, Comment, UserId, BookId, Rating) VALUES (?, ?, ?, ?, ?)';
+        const [insertRows, insertFields] = await pool.query(query, [title, body, userId, bookId, rating]);
+
+        if (insertRows.affectedRows > 0) {
+            res.status(201).json({ success: true, message: 'Review added successfully' });
+        } else {
+            res.status(500).json({ success: false, message: 'Failed to add review' });
+        }
+    } catch (error) {
+        console.error('Error adding review to database:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
+app.post('/reviews', async (req, res) => {
+    try {
+        // Consulta SQL para selecionar todos os campos de todas as linhas da tabela Reviews
+        const query = 'SELECT ReviewID, Title, Comment, UserId, Rating FROM Reviews';
+
+        // Executa a consulta no banco de dados
+        const [rows] = await pool.query(query);
+
+        // Verifica se foram encontradas revisões
+        if (rows.length > 0) {
+            res.status(200).json({ success: true, reviews: rows });
+        } else {
+            res.status(404).json({ success: false, message: 'No reviews found' });
+        }
+    } catch (error) {
+        console.error('Error fetching reviews from database:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
+
+
 
 app.listen(5000, () => {
     console.log("Server run on port 5000");

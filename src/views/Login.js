@@ -38,12 +38,13 @@ const Login = () => {
             console.log(data);
             if (data.success) {
                 localStorage.setItem('token', data.token); // Armazena o token no localStorage
+                localStorage.setItem('userID', data.userID); // Armazena o userID no localStorage
                 // Redireciona para a página inicial após o login bem-sucedido
                 window.location.replace('/');
             }
         })
         .catch(error => console.error('Erro:', error));
-    }
+    }    
 
     function handleCreate(e) {
         e.preventDefault();
