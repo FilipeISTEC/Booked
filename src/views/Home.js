@@ -4,7 +4,9 @@ import ReviewList from "../components/ReviewList";
 import useFetch from "../hooks/useFetch";
 
 const Home = () => {
-    const { data: reviews, isPending, error } = useFetch("http://localhost:5000/reviews");
+    const { data: responseData, isPending, error } = useFetch("http://localhost:5000/reviews");
+    console.log(responseData);
+    const reviews = responseData?.reviews; 
 
     return (
         <div>
@@ -24,3 +26,4 @@ const Home = () => {
 }
 
 export default Home;
+

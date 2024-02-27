@@ -79,10 +79,9 @@ app.get("/books", async (req, res) => {
 });
 
 app.post("/creview", async (req, res) => {
-    const { title, body, userId, bookId, rating } = req.body; // Extrai os dados do corpo da solicitação
+    const { title, body, userId, bookId, rating } = req.body; 
 
     try {
-        // Insira os dados da avaliação no banco de dados
         const query = 'INSERT INTO Reviews (Title, Comment, UserId, BookId, Rating) VALUES (?, ?, ?, ?, ?)';
         const [insertRows, insertFields] = await pool.query(query, [title, body, userId, bookId, rating]);
 
@@ -97,15 +96,10 @@ app.post("/creview", async (req, res) => {
     }
 });
 
-app.post('/reviews', async (req, res) => {
+app.get('/reviews', async (req, res) => {
     try {
-        // Consulta SQL para selecionar todos os campos de todas as linhas da tabela Reviews
         const query = 'SELECT ReviewID, Title, Comment, UserId, Rating FROM Reviews';
-
-        // Executa a consulta no banco de dados
         const [rows] = await pool.query(query);
-
-        // Verifica se foram encontradas revisões
         if (rows.length > 0) {
             res.status(200).json({ success: true, reviews: rows });
         } else {
@@ -116,6 +110,57 @@ app.post('/reviews', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 });
+app.post('/detailReview', async (req, res) => {
+    const { id } = req.body;
+    try {
+        const query = 'SELECT * FROM Reviews WHERE ReviewID = ?'; 
+        const [rows] = await pool.query(query, [id]); 
+        if (rows.length > 0) {
+            res.status(200).json({ success: true, review: rows[0] });
+        } else {
+            res.status(404).json({ success: false, message: 'Review not found' }); 
+        }
+    } catch (error) {
+        console.error('Error fetching review from database:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' }); 
+    }
+});
+
+app.post('/submitUser', async (req, res) => {
+    const { id } = req.body;
+    try {
+        const query = 'SELECT Username FROM Users WHERE UserID = ?'; 
+        const [rows] = await pool.query(query, [id]); 
+        if (rows.length > 0) {
+            res.status(200).json({ success: true, user: rows[0] });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' }); 
+        }
+    } catch (error) {
+        console.error('Error fetching user from database:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' }); 
+    }
+});
+
+app.post('/submitBook', async (req, res) => {
+    const { id } = req.body; 
+    try {
+        const query = 'SELECT Title FROM Books WHERE BookID = ?';
+        const [rows] = await pool.query(query, [id]); 
+        if (rows.length > 0) {
+            res.status(200).json({ success: true, book: rows[0] });
+        } else {
+            res.status(404).json({ success: false, message: 'Book not found' }); 
+        }
+    } catch (error) {
+        console.error('Error fetching book from database:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' }); 
+    }
+});
+
+
+
+
 
 
 

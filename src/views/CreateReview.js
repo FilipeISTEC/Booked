@@ -1,7 +1,6 @@
 import "../assets/styles/CreateReview.css";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import Rating from "../components/Rating";
 
 function getUsernameFromLocalStorage() {
     const token = localStorage.getItem('token');
