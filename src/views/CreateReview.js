@@ -55,7 +55,7 @@ const CreateReview = () => {
         console.log(review);
         setIsPending(true);
 
-        fetch("http://localhost:5000/creview", {
+        fetch("http://localhost:5015/creview", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(review),
@@ -70,7 +70,7 @@ const CreateReview = () => {
     const fetchBooks = async () => {
         try {
             // Faz a requisição para obter os livros da base de dados
-            const response = await fetch("http://localhost:5000/books");
+            const response = await fetch("http://localhost:5015/books");
             const data = await response.json();
             setBooks(data); // Armazena os livros obtidos no estado 'books'
             console.log(data);

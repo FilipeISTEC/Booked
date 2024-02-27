@@ -4,7 +4,7 @@ import ReviewList from "../components/ReviewList";
 import useFetch from "../hooks/useFetch";
 
 const Home = () => {
-    const { data: responseData, isPending, error } = useFetch("http://localhost:5000/reviews");
+    const { data: responseData, isPending, error } = useFetch("http://localhost:5015/reviews");
     console.log(responseData);
     const reviews = responseData?.reviews; 
 

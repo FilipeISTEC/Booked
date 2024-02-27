@@ -39,7 +39,7 @@ const ReviewDetails = () => {
     }, [id]);
 
     const fetchReviewDetails = async (id) => {
-        return fetch(`http://localhost:5000/detailReview`, {
+        return fetch(`http://localhost:5015/detailReview`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const ReviewDetails = () => {
     };
 
     const fetchUserDetails = async (id) => {
-        return fetch(`http://localhost:5000/submitUser`, {
+        return fetch(`http://localhost:5015/submitUser`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const ReviewDetails = () => {
     };
 
     const fetchBookDetails = async (id) => {
-        return fetch(`http://localhost:5000/submitBook`, {
+        return fetch(`http://localhost:5015/submitBook`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
