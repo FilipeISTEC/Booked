@@ -19,30 +19,8 @@ body {
   }
   
   .login-form input.control::placeholder {
-    color: #E4D5C7;
+    color: #2e2d2d;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 
 .container {
     margin: auto;
@@ -257,3 +235,4 @@ input[type=checkbox] {
     color: darken(#FFFFFF, 20%);
     transition: .5s all ease;
 }
+

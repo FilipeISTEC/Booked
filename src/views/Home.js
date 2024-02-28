@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../assets/styles/Home.css";
 import ReviewList from "../components/ReviewList";
 import useFetch from "../hooks/useFetch";
@@ -7,13 +7,31 @@ const Home = () => {
     const { data: responseData, isPending, error } = useFetch("http://localhost:5015/reviews");
     console.log(responseData);
     const reviews = responseData?.reviews; 
+    const history = useHistory();
+
+    const handleNewReviewClick = () => {
+        const userToken = localStorage.getItem('token');
+        if (!userToken) {
+            alert("You need to login to create a new review.");
+            history.push("/login");
+        } else {
+            history.push("/create");
+        }
+    };
+
+    const handleNoReviewsAlert = () => {
+        if (!isPending && !error && !reviews) {
+            alert("Database not available. Please try again later or contact one of the administrators.");
+        }
+    };
+    handleNoReviewsAlert();
 
     return (
         <div>
             <div className="home-page">
-                <Link to="/create" className="New-Review">
+                <button className="New-Review" onClick={handleNewReviewClick}>
                     New Review +
-                </Link>
+                </button>
             </div>
 
             <div className="reviews">
@@ -26,4 +44,3 @@ const Home = () => {
 }
 
 export default Home;
-

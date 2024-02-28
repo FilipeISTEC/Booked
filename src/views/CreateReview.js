@@ -7,51 +7,60 @@ function getUsernameFromLocalStorage() {
 
     if (token) {
         try {
-            // Decodifica o token JWT
             const base64Url = token.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
             const decodedData = JSON.parse(atob(base64));
-
-            // Extrai e retorna o nome de usuário (username) do objeto decodificado
             return decodedData.username;
         } catch (error) {
             console.error('Erro ao decodificar o token:', error);
-            return null; // Retorna null em caso de erro
+            return null;
         }
     } else {
         console.error('Token JWT não encontrado no Local Storage');
-        return null; // Retorna null se o token não for encontrado
+        return null;
     }
 }
 
 const CreateReview = () => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    const [bookId, setBookId] = useState(""); // Armazena o ID do livro selecionado
+    const [bookId, setBookId] = useState("");
     const [author, setAuthor] = useState("");
     const [selectedBookTitle, setSelectedBookTitle] = useState("");
     const [isPending, setIsPending] = useState(false);
-    const [books, setBooks] = useState([]); // Armazena os livros obtidos
+    const [books, setBooks] = useState([]);
     const history = useHistory();
     const [rating, setRating] = useState(1);
 
-    // Obtém o nome de usuário do Local Storage ao inicializar o componente
     useEffect(() => {
         const username = getUsernameFromLocalStorage();
         if (username) {
             setAuthor(username);
         }
-
-        // Obtém os livros da base de dados ao inicializar o componente
         fetchBooks();
     }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (!title) {
+            alert("Please fill in the title field.");
+            return;
+        }
+
+        if (!selectedBookTitle) {
+            alert("Please select a book.");
+            return;
+        }
+
+        if (!rating) {
+            alert("Please select a rating.");
+            return;
+        }
+
         const userId = localStorage.getItem('userID');
         const bookId = findBookIdByTitle(selectedBookTitle);
-        const review = { title, body, userId, bookId, rating }; // Adiciona o ID do livro aos dados da avaliação
+        const review = { title, body, userId, bookId, rating };
         console.log(review);
         setIsPending(true);
 
@@ -60,22 +69,25 @@ const CreateReview = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(review),
         }).then(() => {
-            console.log("new review added");
+            console.log("New review added");
             setIsPending(false);
             history.push("/");
+        }).catch((error) => {
+            console.error("Error while accessing the database:", error);
+            alert("Failed to access the database.");
         });
     };
 
-    // Função para obter os livros da base de dados
+
     const fetchBooks = async () => {
         try {
-            // Faz a requisição para obter os livros da base de dados
             const response = await fetch("http://localhost:5015/books");
             const data = await response.json();
-            setBooks(data); // Armazena os livros obtidos no estado 'books'
+            setBooks(data);
             console.log(data);
         } catch (error) {
             console.error("Erro ao carregar os livros:", error);
+            alert("Failed to connect to the database.");
         }
     };
 
@@ -91,18 +103,13 @@ const CreateReview = () => {
         }
     };
     const findBookIdByTitle = (title) => {
-        // Percorre a lista de livros
         for (let i = 0; i < books.length; i++) {
-            // Se encontrar o livro com o título correspondente
             if (books[i].Title === title) {
-                // Retorna o ID do livro encontrado
                 return books[i].id;
             }
         }
-        // Se não encontrar nenhum livro com o título correspondente, retorna null ou outra indicação de que o livro não foi encontrado
         return null;
     };
-    
 
     return (
         <div className="create-page">
