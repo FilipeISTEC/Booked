@@ -9,7 +9,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// Rota para lidar com solicitações de login
 app.post("/login", async (req, res) => {
     const { username, password } = req.body;
 
@@ -18,8 +17,8 @@ app.post("/login", async (req, res) => {
         if (rows.length > 0) {
             const user = rows[0];
             if (password === user.Password) {
-                const token = jwt.sign({ username: user.Username }, 'M1nhaC#av3S3cr3ta&SupeR!Segur@P@raTok3nsJWT', { expiresIn: '1h' }); // Gera o token JWT
-                res.json({ success: true, userID: user.UserID, token }); // Retorna o token JWT e o UserID
+                const token = jwt.sign({ username: user.Username }, 'M1nhaC#av3S3cr3ta&SupeR!Segur@P@raTok3nsJWT', { expiresIn: '1h' }); 
+                res.json({ success: true, userID: user.UserID, token }); 
             } else {
                 res.status(401).json({ success: false, message: 'Credenciais inválidas' });
             }
@@ -46,10 +45,10 @@ app.post("/caccount", async (req, res) => {
         const [insertRows, insertFields] = await pool.query(query, [username, email, password]);
 
         if (insertRows.affectedRows > 0) {
-            const userId = insertRows.insertId; // Recupera o UserId da inserção
-            const token = jwt.sign({ username, userId }, 'your_secret_key', { expiresIn: '1h' }); // Inclui o UserId no token
+            const userId = insertRows.insertId; 
+            const token = jwt.sign({ username, userId }, 'your_secret_key', { expiresIn: '1h' }); 
 
-            res.json({ success: true, token }); // Retorna o token com UserId
+            res.json({ success: true, token });
         } else {
             res.status(500).json({ success: false, message: 'Failed to register user' });
         }
@@ -63,20 +62,15 @@ app.post("/caccount", async (req, res) => {
 
 app.get("/books", async (req, res) => {
     try {
-        // Execute a consulta para obter os títulos e IDs de todos os livros
-        const query = 'SELECT BookID AS id, Title FROM Books'; // Usando BookID como ID do livro
+        const query = 'SELECT BookID AS id, Title FROM Books'; 
         const [rows, fields] = await pool.query(query);
 
-        // Verifique se há dados retornados da consulta
         if (rows.length > 0) {
-            // Se houver dados, retorne os títulos e IDs dos livros
             res.status(200).json(rows);
         } else {
-            // Se não houver dados, retorne uma mensagem indicando que nenhum livro foi encontrado
             res.status(404).json({ success: false, message: 'No books found' });
         }
     } catch (error) {
-        // Se ocorrer algum erro durante a execução da consulta, retorne uma mensagem de erro
         console.error('Error fetching books from database:', error);
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
@@ -146,21 +140,18 @@ app.post('/searchReviews', async (req, res) => {
 
 
 app.delete('/deleteReview/:id', async (req, res) => {
-    const { id } = req.params; // Obtém o ID da revisão a ser excluída dos parâmetros da URL
+    const { id } = req.params; 
 
     try {
-        const query = 'DELETE FROM Reviews WHERE ReviewID = ?'; // Query SQL para excluir a revisão com base no ID
-        const [result] = await pool.query(query, [id]); // Executa a query com o ID da revisão
+        const query = 'DELETE FROM Reviews WHERE ReviewID = ?'; 
+        const [result] = await pool.query(query, [id]); 
 
         if (result.affectedRows > 0) {
-            // Se a exclusão foi bem-sucedida (ou seja, se pelo menos uma linha foi afetada)
             res.status(200).json({ success: true, message: 'Review deleted successfully' });
         } else {
-            // Se não houve revisão com o ID especificado
             res.status(404).json({ success: false, message: 'Review not found' });
         }
     } catch (error) {
-        // Se ocorreu um erro durante a exclusão
         console.error('Error deleting review from database:', error);
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
@@ -198,14 +189,6 @@ app.post('/submitBook', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error' }); 
     }
 });
-
-
-
-
-
-
-
-
 
 
 app.listen(5015, () => {

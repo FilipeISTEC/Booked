@@ -72,3 +72,10 @@ Caso seja preciso instalar outro modulo pode ainda executar o seguinte comando `
 ## Importante 
 
 O site não funciona sem ser liberado o seu IP, caso não o tenha feito envie o seu endereço IP  para um dos desenvolvedores para que senha liberado o acesso ao site da base de dados.
+## Equipa de Desenvolvimento
+
+| Nome                 | Email                      | Numero            | Funções                |
+|----------------------|----------------------------|-------------------|------------------------|
+| Diogo Batista        | diogo.batista@my.istec.pt  | 2022166           |Frontend                |
+| Filipe Jacinto       | filipe.jacinto@my.istec.pt | 2022052           |Backend / Base de Dados |
+| Simão Pires          | simao.pires@my.istec.pt    | 2022063           |Frontend / Backend      |

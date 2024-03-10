@@ -27,7 +27,7 @@ const ReviewDetails = () => {
                     if (userData && userData.user) {
                         setUser(userData.user);
                     } else {
-                        setUser({ Username: "Anonymous" }); // Trata caso o usuário não seja encontrado
+                        setUser({ Username: "Anonymous" });
                     }
                 } else {
                     setError(reviewData.message || "Review data not found.");

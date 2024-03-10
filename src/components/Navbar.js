@@ -3,10 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const isLoggedIn = localStorage.getItem('token') !== null; // Verifica se o token está presente no localStorage
+  const isLoggedIn = localStorage.getItem('token') !== null;
 
   const handleLogout = () => {
-    localStorage.clear('token'); // Remove o token do localStorage
+    localStorage.clear('token');
     window.location.replace('/');
   };
   return (
@@ -20,14 +20,10 @@ const Navbar = () => {
         <Link to="/About" style={{ color: '#34A38F' }}>
           About
         </Link>
-
-        <Link to="/Contact" style={{ color: '#34A38F' }}>
-          Contact
-        </Link>
         
         {isLoggedIn ? (
           <Link
-            onClick={handleLogout} // Chama a função handleLogout ao clicar no botão
+            onClick={handleLogout}
             style={{
               color: 'white',
               backgroundColor: '#34A38F',

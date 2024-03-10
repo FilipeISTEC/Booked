@@ -16,7 +16,7 @@ const ReviewList = ({ reviews }) => {
                     body: JSON.stringify({ id: userId }),
                 });
                 const data = await response.json();
-                return data.user; // Supondo que a estrutura da resposta seja { user: { Username: ... } }
+                return data.user;
             } catch (error) {
                 console.error('Error fetching user details:', error);
                 return null;

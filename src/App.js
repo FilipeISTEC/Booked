@@ -37,12 +37,6 @@ function App() {
               <About />
             </Route>
 
-            <Route path="/Contact">
-            <Navbar />
-              <Contact />
-            </Route>
-
-
             <Route exact path="/Login">
             <Navbar />
               <Login />
