@@ -209,7 +209,7 @@ const CreateReview = () => {
                                     value={body}
                                     onChange={(e) => setBody(e.target.value)}
                                     id="bodyTextarea"
-                                    style={{ fontSize: '16px'}}
+                                    style={{ fontSize:'16px'}}
                                 ></textarea>
                             </div>
 
