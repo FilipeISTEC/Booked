@@ -1,14 +1,16 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StarRating from "./StarRating.js";
+import "../assets/styles/ReviewDetails.css"; 
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ReviewDetails = () => {
     const { id } = useParams();
     const [review, setReview] = useState(null);
     const [user, setUser] = useState(null);
-    const [book, setBook] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const history = useHistory();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,10 +24,7 @@ const ReviewDetails = () => {
                     const userData = await userResponse.json();
                     console.log(userData.user.Username);
                     setUser(userData.user);
-                    const bookResponse = await fetchBookDetails(reviewData.review.BookID);
-                    const bookData = await bookResponse.json();
-                    console.log(bookData.book.Title);
-                    setBook(bookData.book);
+                    
                 } else {
                     setError(reviewData.message);
                 }
@@ -58,32 +57,43 @@ const ReviewDetails = () => {
         });
     };
 
-    const fetchBookDetails = async (id) => {
-        return fetch(`http://localhost:5015/submitBook`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id }),
-        });
-    };
+
+    const handleClick = async () => {
+        try {
+            console.log('Deleting review with ID:', id);
+            await fetch(`http://localhost:5015/deleteReview/${id}`, {
+                method: "DELETE"
+            });
+            console.log('Review deleted successfully');
+            history.push("/");
+        } catch (error) {
+            console.error("Error deleting review:", error);
+        }
+    }
+    
 
     return (  
+        <div className="container1">
         <div className="review-details">
             {isLoading && <div>Loading...</div>}
             {error && <div>{error}</div>}
-            {review && user && book && (
+            {review && user && (
                 <article>
-                    <h2>Review Title: {review.Title}</h2>
-                    <p>Written by {user.Username}</p>
-                    <p>Book: {book.Title}</p>
+                    <h2>{review.Title}</h2>
+                    
                     <StarRating
-                                    reviewId={review.ReviewID}
-                                    initialRating={parseFloat(review.Rating)}
-                                />
-                    <div>{review.Comment}</div>
+                        reviewId={review.ReviewID}
+                        initialRating={parseFloat(review.Rating)}
+                    />  
+                <br></br>
+                    <div className="review-comment">{review.Comment}</div>
+                    <br></br>
+                    <p>Written by {user.Username}</p>
+                    <br></br>
+                    <button className="delete" onClick={handleClick}>delete</button>
                 </article>
             )}
+        </div>
         </div>
     );
 };

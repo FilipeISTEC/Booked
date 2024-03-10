@@ -6,7 +6,7 @@ const Navbar = () => {
   const isLoggedIn = localStorage.getItem('token') !== null; // Verifica se o token está presente no localStorage
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove o token do localStorage
+    localStorage.clear('token'); // Remove o token do localStorage
     window.location.replace('/');
   };
   return (

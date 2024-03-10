@@ -18,38 +18,9 @@ body {
     display: grid;
   }
   
-  .login-form input.control::placeholder {
-    color: #E4D5C7;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
 
-.container {
-    margin: auto;
-    width: 650px; 
-    height: 550px; 
-    position: middle;
-}
+
 
 .welcome {
     background: #186049;
@@ -223,6 +194,7 @@ input::placeholder {
     letter-spacing: 2px;
     font-size: 1.3em;
     font-weight: 100;
+    
 }
 
 input:focus {

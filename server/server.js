@@ -126,6 +126,42 @@ app.post('/detailReview', async (req, res) => {
     }
 });
 
+app.post('/searchReviews', async (req, res) => {
+    const { title } = req.body;
+    try {
+        const query = 'SELECT * FROM Reviews WHERE Title LIKE ?'; 
+        const [rows] = await pool.query(query, [`%${title}%`]); 
+        res.status(200).json({ success: true, reviews: rows });
+    } catch (error) {
+        console.error('Error searching reviews from database:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' }); 
+    }
+});
+
+
+
+app.delete('/deleteReview/:id', async (req, res) => {
+    const { id } = req.params; // Obtém o ID da revisão a ser excluída dos parâmetros da URL
+
+    try {
+        const query = 'DELETE FROM Reviews WHERE ReviewID = ?'; // Query SQL para excluir a revisão com base no ID
+        const [result] = await pool.query(query, [id]); // Executa a query com o ID da revisão
+
+        if (result.affectedRows > 0) {
+            // Se a exclusão foi bem-sucedida (ou seja, se pelo menos uma linha foi afetada)
+            res.status(200).json({ success: true, message: 'Review deleted successfully' });
+        } else {
+            // Se não houve revisão com o ID especificado
+            res.status(404).json({ success: false, message: 'Review not found' });
+        }
+    } catch (error) {
+        // Se ocorreu um erro durante a exclusão
+        console.error('Error deleting review from database:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
+
 app.post('/submitUser', async (req, res) => {
     const { id } = req.body;
     try {
@@ -157,6 +193,8 @@ app.post('/submitBook', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error' }); 
     }
 });
+
+
 
 
 

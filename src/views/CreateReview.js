@@ -1,57 +1,84 @@
 import "../assets/styles/CreateReview.css";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import StarRating from "../components/StarRating";
+import AutocompleteInput from "../components/AutocompleteInput";
 
 function getUsernameFromLocalStorage() {
     const token = localStorage.getItem('token');
 
     if (token) {
         try {
-            // Decodifica o token JWT
             const base64Url = token.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
             const decodedData = JSON.parse(atob(base64));
-
-            // Extrai e retorna o nome de usuário (username) do objeto decodificado
             return decodedData.username;
         } catch (error) {
             console.error('Erro ao decodificar o token:', error);
-            return null; // Retorna null em caso de erro
+            return null;
         }
     } else {
         console.error('Token JWT não encontrado no Local Storage');
-        return null; // Retorna null se o token não for encontrado
+        return null;
     }
 }
 
 const CreateReview = () => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    const [bookId, setBookId] = useState(""); // Armazena o ID do livro selecionado
     const [author, setAuthor] = useState("");
-    const [selectedBookTitle, setSelectedBookTitle] = useState("");
+    const [user, setUser] = useState("");
+    const [selectedBookTitle] = useState("");
     const [isPending, setIsPending] = useState(false);
-    const [books, setBooks] = useState([]); // Armazena os livros obtidos
+    const [books, setBooks] = useState([]);
     const history = useHistory();
     const [rating, setRating] = useState(1);
 
-    // Obtém o nome de usuário do Local Storage ao inicializar o componente
+    const adjustTextareaHeight = () => {
+        const textarea = document.getElementById("bodyTextarea");
+        textarea.style.height = "auto";
+        textarea.style.height = `${textarea.scrollHeight}px`;
+      };
+
+
     useEffect(() => {
         const username = getUsernameFromLocalStorage();
         if (username) {
-            setAuthor(username);
+            setUser(username);
         }
-
-        // Obtém os livros da base de dados ao inicializar o componente
         fetchBooks();
     }, []);
+
+    useEffect(() => {
+        adjustTextareaHeight();
+      }, [title, author, body]);
+
+    const handleTitleChange = (newTitle, newAuthor) => {
+        setTitle(newTitle);
+        setAuthor(newAuthor);
+      };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (!title) {
+            alert("Please fill in the title field.");
+            return;
+        }
+
+        if (!AutocompleteInput) {
+            alert("Please select a book.");
+            return;
+        }
+
+        if (!rating) {
+            alert("Please select a rating.");
+            return;
+        }
+
         const userId = localStorage.getItem('userID');
         const bookId = findBookIdByTitle(selectedBookTitle);
-        const review = { title, body, userId, bookId, rating }; // Adiciona o ID do livro aos dados da avaliação
+        const review = { title, body, userId, bookId, rating };
         console.log(review);
         setIsPending(true);
 
@@ -60,115 +87,144 @@ const CreateReview = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(review),
         }).then(() => {
-            console.log("new review added");
+            console.log("New review added");
             setIsPending(false);
             history.push("/");
+        }).catch((error) => {
+            console.error("Error while accessing the database:", error);
+            alert("Failed to access the database.");
         });
     };
 
-    // Função para obter os livros da base de dados
+
     const fetchBooks = async () => {
         try {
-            // Faz a requisição para obter os livros da base de dados
             const response = await fetch("http://localhost:5015/books");
             const data = await response.json();
-            setBooks(data); // Armazena os livros obtidos no estado 'books'
+            setBooks(data);
             console.log(data);
         } catch (error) {
             console.error("Erro ao carregar os livros:", error);
+            alert("Failed to connect to the database.");
         }
     };
 
-    const handleIncreaseRating = () => {
-        if (rating < 5) {
-            setRating(rating + 1);
-        }
-    };
-
-    const handleDecreaseRating = () => {
-        if (rating > 1) {
-            setRating(rating - 1);
-        }
-    };
     const findBookIdByTitle = (title) => {
-        // Percorre a lista de livros
         for (let i = 0; i < books.length; i++) {
-            // Se encontrar o livro com o título correspondente
             if (books[i].Title === title) {
-                // Retorna o ID do livro encontrado
                 return books[i].id;
             }
         }
-        // Se não encontrar nenhum livro com o título correspondente, retorna null ou outra indicação de que o livro não foi encontrado
         return null;
     };
-    
 
     return (
-        <div className="create-page">
-            <h2>Add a new Review</h2>
-            <div className="divider"></div>
-            <div className="form">
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>Review Title:</label>
-                        <input
-                            type="text"
-                            required
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    </div>
+        <div className="container flex-container">
+            <div className="left">
+                <input
+                    type="titulo--preview"
+                    disabled
+                    value={title}
+                    className="titulo-input"
+                    id="tituloInput"
+                />
+                <input
+                    type="author-preview"
+                    disabled
+                    value={author}
+                    className="author-input"
+                    id="authorInput"
+                />
 
-                    <div className="form-group">
-                        <label>Book Title:</label>
-                        <select
-                            value={selectedBookTitle}
-                            onChange={(e) => setSelectedBookTitle(e.target.value)}
-                        >
-                            <option value="">Select a book</option>
-                            {books.map((book) => (
-                                <option key={book.id} value={book.Title}>
-                                    {book.Title}
-                                </option>
-                            ))}
-                        </select>
-
-                    </div>
-
-                    <div className="form-group">
-                        <label>Review Text:</label>
-                        <textarea
-                            required
-                            value={body}
-                            onChange={(e) => setBody(e.target.value)}
-                        ></textarea>
-                    </div>
-
-                    <div className="button-group">
-                        {!isPending ? (
-                            <button className="CreateReview-btn">Add Review</button>
-                        ) : (
-                            <button className="CreateReview-btn" disabled>Adding Review...</button>
-                        )}
-                    </div>
-                </form>
-
-            </div>
-
-            <div className="form-group">
-                <label>Rating:</label>
-                <div>
-                    <button onClick={handleDecreaseRating}>-</button>
-                    <span>{rating}</span>
-                    <button onClick={handleIncreaseRating}>+</button>
+                <div className="rating-preview">
+                    <StarRating initialRating={rating}/>
                 </div>
+
+                <textarea
+                    type="text-preview"
+                    disabled
+                    value={body}
+                    className="body-input"
+                    id="bodyTextarea"
+                    />
+                <label style={{fontSize:'15px', lineHeight: '3', verticalAlign: 'top', color:'#6e6e6e50' }}>By </label>
+                <textarea 
+                    type="user-preview"
+                    disabled
+                    value={user}
+                    className="user-input"
+                    id="userInput"
+                    style={{ borderRadius:'0px 10px 10px 0px', height:'14px', fontSize:'14px' , color:'#6e6e6e90' }}
+                />
+
             </div>
 
-            <div className="preview-left">
-                <p>Title: {title}</p>
-                <p>Author: {author}</p>
-                <p>Review: {body}</p>
+            <div className="vertical-line"></div>
+
+            <div className="right" style={{width: "35%"}}>
+                <div className="create-page">
+                    <div className="form">
+                        <form onSubmit={handleSubmit}>
+                        <AutocompleteInput onTitleChange={handleTitleChange}/>
+                            
+                        <label>Author:</label>
+                                <textarea
+                                    value={author}
+                                    onChange={(e) => setAuthor(e.target.value)}
+                                    disabled
+                                    style={{ height: '15px', textAlign:"center", borderColor:"#e4d5c700", fontWeight:"bold", fontSize:"15px", padding:"10px"}}
+                                    className="author"
+                                ></textarea>
+                                <br></br>
+                            <div className="form-group2" style={{ display: 'flex', alignItems: 'center' }}>
+                                
+                                <label>Username: </label>
+                                <textarea
+                                    value={user}
+                                    onChange={(e) => setUser(e.target.value)}
+                                    disabled
+                                    style={{ height: '13px' , marginRight:"100PX", fontWeight: "bold" , fontSize:"12px", textAlign:"center"}}
+                                ></textarea>
+
+                                <div className="Rating" style={{ marginLeft: '20px' , display: 'flex', alignItems: 'center' }}>
+                                    <label style={{ marginRight: '10px' }}>Rating:</label>
+                                    <select
+                                        value={rating}
+                                        onChange={(e) => setRating(parseInt(e.target.value))}
+                                    >
+                                        {[1, 2, 3, 4, 5].map((value) => (
+                                            <option key={value} value={value}>
+                                                {value}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div className="form-group1" style={{marginTop: '20px', width:"100%"}}>
+                                <label >Review</label>
+                                <textarea 
+                                    required
+                                    value={body}
+                                    onChange={(e) => setBody(e.target.value)}
+                                    id="bodyTextarea"
+                                    style={{ fontSize: '16px'}}
+                                ></textarea>
+                            </div>
+
+                            <div className="button-group">
+                                {!isPending ? (
+                                    <button className="CreateReview-btn">Add Review</button>
+                                ) : (
+                                    <button className="CreateReview-btn" disabled>
+                                        Adding Review...
+                                    </button>
+                                )}
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     );
