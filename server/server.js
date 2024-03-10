@@ -42,13 +42,14 @@ app.post("/caccount", async (req, res) => {
             return;
         }
 
-        // If the username is not taken, proceed to register the user
         const query = 'INSERT INTO Users (Username, Email, Password) VALUES (?, ?, ?)';
         const [insertRows, insertFields] = await pool.query(query, [username, email, password]);
 
         if (insertRows.affectedRows > 0) {
-            const token = jwt.sign({ username }, 'your_secret_key', { expiresIn: '1h' }); // Gera o token JWT
-            res.json({ success: true, token }); // Retorna o token JWT
+            const userId = insertRows.insertId; // Recupera o UserId da inserção
+            const token = jwt.sign({ username, userId }, 'your_secret_key', { expiresIn: '1h' }); // Inclui o UserId no token
+
+            res.json({ success: true, token }); // Retorna o token com UserId
         } else {
             res.status(500).json({ success: false, message: 'Failed to register user' });
         }
@@ -57,6 +58,9 @@ app.post("/caccount", async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error register' });
     }
 });
+
+
+
 app.get("/books", async (req, res) => {
     try {
         // Execute a consulta para obter os títulos e IDs de todos os livros
@@ -80,6 +84,7 @@ app.get("/books", async (req, res) => {
 
 app.post("/creview", async (req, res) => {
     const { title, body, userId, bookId, rating } = req.body; 
+    console.log("Received review:", req.body); 
 
     try {
         const query = 'INSERT INTO Reviews (Title, Comment, UserId, BookId, Rating) VALUES (?, ?, ?, ?, ?)';

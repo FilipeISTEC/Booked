@@ -15,28 +15,32 @@ const ReviewDetails = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true);
             try {
-                const reviewResponse = await fetchReviewDetails(id);
-                const reviewData = await reviewResponse.json();
-                console.log("Review Data:", reviewData);
-                if (reviewData.success) {
+                const reviewResp = await fetchReviewDetails(id);
+                const reviewData = await reviewResp.json();
+                if (reviewData && reviewData.success && reviewData.review) {
                     setReview(reviewData.review);
-                    const userResponse = await fetchUserDetails(reviewData.review.UserID);
-                    const userData = await userResponse.json();
-                    console.log(userData.user.Username);
-                    setUser(userData.user);
-                    
+    
+                    const userResp = await fetchUserDetails(reviewData.review.UserID);
+                    const userData = await userResp.json();
+                    if (userData && userData.user) {
+                        setUser(userData.user);
+                    } else {
+                        setUser({ Username: "Anonymous" }); // Trata caso o usuário não seja encontrado
+                    }
                 } else {
-                    setError(reviewData.message);
+                    setError(reviewData.message || "Review data not found.");
                 }
             } catch (error) {
-                setError(error.message);
+                setError("Failed to fetch data: " + error.message);
             } finally {
                 setIsLoading(false);
             }
         };
         fetchData();
     }, [id]);
+    
 
     const fetchReviewDetails = async (id) => {
         return fetch(`http://localhost:5015/detailReview`, {
