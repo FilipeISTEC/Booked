@@ -76,8 +76,7 @@ const CreateReview = () => {
                         <form onSubmit={handleSubmit}>
                             <AutocompleteInput onTitleChange={(newTitle) => { setTitle(newTitle); }}/>
                             <div className="form-group2" style={{ display: 'flex', alignItems: 'center' }}>
-                                <label>Username: </label>
-                                <textarea value={userId} disabled style={{ height: '13px', marginRight: "100PX", fontWeight: "bold", fontSize: "12px", textAlign: "center"}}></textarea>
+                                
                                 <div className="Rating" style={{ marginLeft: '20px', display: 'flex', alignItems: 'center' }}>
                                     <label style={{ marginRight: '10px' }}>Rating:</label>
                                     <select value={rating} onChange={(e) => setRating(parseInt(e.target.value))}>
