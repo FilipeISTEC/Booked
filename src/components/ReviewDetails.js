@@ -4,6 +4,7 @@ import StarRating from "./StarRating.js";
 import "../assets/styles/ReviewDetails.css"; 
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
+
 const ReviewDetails = () => {
     const { id } = useParams();
     const [review, setReview] = useState(null);
