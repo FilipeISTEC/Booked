@@ -1,7 +1,7 @@
 import React from 'react';
 import "../assets/styles/ReviewList.css"; // Certifique-se de que o caminho está correto
 import { Link } from "react-router-dom";
-import StarRating from "./StarRating.js";
+import StarRating from "../components/StarRating"
 import { useState, useEffect } from "react";
 
 const ReviewList = ({ reviews }) => {
